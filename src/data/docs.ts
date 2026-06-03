@@ -7,7 +7,7 @@ export const docsParentCategories = [
   {
     slug: 'integrations',
     name: 'Integrations',
-    description: 'Extend Compass with analytics, editorial systems, and embedded docs experiences.',
+    description: 'Extend Compass with analytics, editorial systems, and optional tools around your docs workflow.',
   },
 ] as const;
 
@@ -34,17 +34,10 @@ export const docsCategories = [
     icon: 'spark',
   },
   {
-    name: 'Embeds & Chat',
-    slug: 'embeds-and-chat',
-    parent: 'integrations',
-    description: 'Cover widgets, embedded help experiences, and messaging touchpoints.',
-    icon: 'spark',
-  },
-  {
     name: 'Channels & Apps',
     slug: 'channels-and-apps',
     parent: 'integrations',
-    description: 'Cover analytics, CMS-backed editing, and other tools that can power your docs workflow.',
+    description: 'Cover analytics, CMS-backed editing, embedded support surfaces, and other tools around your docs.',
     icon: 'grid',
   },
 ] as const;

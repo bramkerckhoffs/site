@@ -14,7 +14,7 @@ Compass is a clean Astro documentation theme for product docs, support centers, 
 - MDX content collections for article authoring
 - Parent categories, sub-category pages, and article routes
 - Searchable docs landing page and sidebar search
-- Reusable docs components like callouts, feature headings, and showcases
+- Reusable docs components like callouts, tabs, steps, accordions, buttons, and quotes
 - Light and dark mode support
 - Shared site config for branding, links, and CTA text
 - Sitemap support for production builds
@@ -94,11 +94,16 @@ Categories are defined in [src/data/docs.ts](./src/data/docs.ts). That file powe
 Compass includes MDX-ready components for richer docs pages:
 
 - `Callout`
-- `FeatureHeading`
-- `ComponentShowcase`
-- `ShowcaseItem`
+- `ButtonLink`
+- `QuoteBlock`
+- `Accordion`
+- `Steps`
+- `Step`
+- `Tabs`
 
 They are registered in [src/components/docs/mdx-components.ts](./src/components/docs/mdx-components.ts) and used automatically in article routes.
+
+If you add your own Astro component, register it there to make it available inside `.mdx` articles.
 
 ## Project Structure
 

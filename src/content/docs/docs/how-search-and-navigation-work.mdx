@@ -1,0 +1,53 @@
+---
+title: "How Search and Navigation Work"
+description: "Understand how Compass builds category pages, article links, and client-side search from your docs data."
+category: "docs"
+order: 5
+updatedAt: 2026-06-03
+---
+
+Compass keeps navigation explicit. Instead of inferring everything from folders, it combines your docs data file with article frontmatter and route templates.
+
+## The key files
+
+- `src/data/docs.ts` defines parent sections, sub-categories, labels, descriptions, and slugs
+- `src/content/docs` stores the articles and their frontmatter
+- `src/pages/[parent]/[category]/index.astro` renders sub-category pages
+- `src/pages/[parent]/[category]/[slug].astro` renders article pages
+
+## How article links are generated
+
+Each article uses a `category` value in frontmatter. Compass matches that value to a category slug from `src/data/docs.ts`, then builds the URL from the category slug plus the filename.
+
+For example:
+
+```mdx
+---
+title: "Manage Docs"
+category: "docs"
+---
+```
+
+Saved as `manage-docs.mdx`, this becomes `/getting-started/docs/manage-docs`.
+
+## How search works
+
+Compass builds a small client-side search index from the docs collection.
+
+You can see that logic in:
+
+- `src/components/SearchHero.astro` for homepage search
+- `src/components/Sidebar.astro` for article and category page search
+
+Each search entry includes:
+
+- the article title
+- the description
+- the category slug
+- the generated URL
+
+## When to update what
+
+- change `src/data/docs.ts` when you want to rename or regroup sections
+- change article frontmatter when you want to move or reorder a document
+- change route templates only when the URL structure itself should change
