@@ -1,6 +1,13 @@
 ---
 import site from '../../site.config.mjs';
 import { docsParentCategories } from '../data/docs';
+
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+function isActiveNavItem(href: string) {
+  const normalizedHref = href.replace(/\/+$/, '') || '/';
+  return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
+}
 ---
 
 <header class="site-header sticky top-0 z-40 w-full shrink-0 border-b border-[var(--color-border)] bg-[color:color-mix(in_srgb,var(--color-surface)_95%,transparent)] backdrop-blur">
@@ -11,12 +18,25 @@ import { docsParentCategories } from '../data/docs';
 
     <nav class="hidden items-center gap-6 text-sm font-medium text-[var(--color-text)] lg:flex">
       {docsParentCategories.map((category) => (
-        <a
-          href={`/${category.slug}`}
-          class="py-5 transition-colors hover:text-[var(--color-accent)]"
-        >
-          {category.name}
-        </a>
+        (() => {
+          const href = `/${category.slug}`;
+          const isActive = isActiveNavItem(href);
+
+          return (
+            <a
+              href={href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                'py-5 transition-colors',
+                isActive
+                  ? 'text-[var(--color-accent)]'
+                  : 'hover:text-[var(--color-accent)]',
+              ]}
+            >
+              {category.name}
+            </a>
+          );
+        })()
       ))}
     </nav>
 
@@ -79,12 +99,25 @@ import { docsParentCategories } from '../data/docs';
     <div class="mx-auto max-w-[1280px] px-4 py-4 md:px-8">
       <nav class="flex flex-col gap-1">
         {docsParentCategories.map((category) => (
-          <a
-          href={`/${category.slug}`}
-          class="block w-full rounded-none px-4 py-3 text-sm font-medium text-[var(--color-text)] transition-colors hover:bg-[var(--color-hover-surface)] hover:text-[var(--color-accent)]"
-          >
-            {category.name}
-          </a>
+          (() => {
+            const href = `/${category.slug}`;
+            const isActive = isActiveNavItem(href);
+
+            return (
+              <a
+                href={href}
+                aria-current={isActive ? 'page' : undefined}
+                class:list={[
+                  'block w-full rounded-none px-4 py-3 text-sm font-medium transition-colors',
+                  isActive
+                    ? 'bg-[var(--color-hover-surface)] text-[var(--color-accent)]'
+                    : 'text-[var(--color-text)] hover:bg-[var(--color-hover-surface)] hover:text-[var(--color-accent)]',
+                ]}
+              >
+                {category.name}
+              </a>
+            );
+          })()
         ))}
       </nav>
 

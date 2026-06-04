@@ -5,6 +5,24 @@
   "type": "module",
   "license": "MIT",
   "private": false,
+  "author": "Andrei Alba",
+  "homepage": "https://compass-lilac-tau.vercel.app/",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreialba/compass.git"
+  },
+  "files": [
+    "src",
+    "public",
+    "LICENSE",
+    "README.md",
+    "astro.config.mjs",
+    "site.config.mjs",
+    "tsconfig.json"
+  ],
   "scripts": {
     "dev": "astro dev --host 0.0.0.0 --port 3000",
     "start": "astro dev --host 0.0.0.0 --port 3000",

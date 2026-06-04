@@ -6,6 +6,9 @@ order: 7
 updatedAt: 2026-06-03
 ---
 
+import { Image } from 'astro:assets';
+import placeholderImage from '../../compass-docs/adding-images/docs-image-placeholder.png';
+
 Steps work best when order matters and each item includes more than a one-line instruction.
 
 ## Use in MDX
@@ -32,6 +35,13 @@ The wrapper and item components live in `src/components/docs/Steps.astro` and `s
 <Steps>
   <Step number={1} title="First Step">
     These are instructions or content that only pertain to the first step.
+
+    <Image
+      src={placeholderImage}
+      alt="Placeholder illustration displayed beneath the first step content"
+      width={1200}
+      layout="constrained"
+    />
   </Step>
   <Step number={2} title="Second Step">
     These are instructions or content that only pertain to the second step.

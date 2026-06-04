@@ -13,7 +13,7 @@ Compass keeps navigation explicit. Instead of inferring everything from folders,
 - `src/data/docs.ts` defines parent sections, sub-categories, labels, descriptions, and slugs
 - `src/content/docs` stores the articles and their frontmatter
 - `src/pages/[parent]/[category]/index.astro` renders sub-category pages
-- `src/pages/[parent]/[category]/[slug].astro` renders canonical article pages
+- `src/pages/[parent]/[category]/[slug].astro` renders article pages
 - `src/components/Sidebar.astro` renders the per-section sidebar
 
 ## How article links are generated
@@ -41,11 +41,11 @@ That means:
 - section labels and slugs come from `docsCategories`
 - article ordering inside a section comes from each article's `order` frontmatter
 
-## Canonical routes and convenience routes
+## Route structure
 
-Compass includes canonical nested article routes like `/getting-started/compass-docs/manage-docs`, plus flatter convenience routes for some pages.
+Compass uses nested article routes like `/getting-started/compass-docs/manage-docs`.
 
-The nested routes are the primary docs structure because they:
+That structure matters because it:
 
 - preserve the parent section in the URL
 - keep breadcrumbs predictable

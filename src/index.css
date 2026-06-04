@@ -477,6 +477,11 @@ html.dark .astro-code[data-language='text'] span {
   background: var(--color-surface);
 }
 
+.docs-step-body > :where(p, ul, ol, blockquote, pre, .astro-image) + :where(img, picture, .astro-image),
+.docs-step-body > :where(img, picture, .astro-image) + :where(p, ul, ol, blockquote, pre) {
+  margin-top: 1rem;
+}
+
 .pagination-controls {
   display: flex;
   flex-wrap: wrap;
