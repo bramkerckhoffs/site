@@ -1,7 +1,7 @@
 ---
 title: "How Navigation Works"
 description: "Understand how Compass builds category pages, article links, and sidebar structure from your docs data."
-category: "docs"
+category: "compass-docs"
 order: 5
 updatedAt: 2026-06-04
 ---
@@ -18,18 +18,18 @@ Compass keeps navigation explicit. Instead of inferring everything from folders,
 
 ## How article links are generated
 
-Each article uses a `category` value in frontmatter. Compass matches that value to a category slug from `src/data/docs.ts`, then builds the URL from the category slug plus the filename.
+Each article uses a `category` value in frontmatter. Compass matches that value to a category slug from `src/data/docs.ts`, then builds the URL from the category slug plus the article filename.
 
 For example:
 
 ```mdx
 ---
 title: "Manage Docs"
-category: "docs"
+category: "compass-docs"
 ---
 ```
 
-Saved as `manage-docs.mdx`, this becomes `/getting-started/docs/manage-docs`.
+Saved as `manage-docs/manage-docs.mdx`, this becomes `/getting-started/compass-docs/manage-docs`.
 
 ## How the sidebar is assembled
 
@@ -43,7 +43,7 @@ That means:
 
 ## Canonical routes and convenience routes
 
-Compass includes canonical nested article routes like `/getting-started/docs/manage-docs`, plus flatter convenience routes for some pages.
+Compass includes canonical nested article routes like `/getting-started/compass-docs/manage-docs`, plus flatter convenience routes for some pages.
 
 The nested routes are the primary docs structure because they:
 

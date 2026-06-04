@@ -7,6 +7,10 @@ import site from './site.config.mjs';
 export default defineConfig({
   site: site.siteUrl,
   integrations: [mdx(), sitemap()],
+  image: {
+    layout: 'constrained',
+    responsiveStyles: true,
+  },
   markdown: {
     shikiConfig: {
       themes: {

@@ -1,0 +1,54 @@
+---
+title: "Manage Docs"
+description: "Maintain collections, navigation order, and article publishing workflows."
+category: "compass-docs"
+order: 2
+updatedAt: 2026-06-03
+---
+
+Compass keeps content management intentionally simple: categories live in one data file, and every article lives in its own content folder.
+
+## Update the information architecture
+
+Edit `src/data/docs.ts` when you need to:
+
+- rename a parent section
+- add or remove a sub-category
+- change card descriptions
+- change category slugs and icons
+
+## Reorder articles
+
+Inside each article, the `order` field controls its position within a category. Lower numbers appear first.
+
+## Keep routes predictable
+
+Compass generates article slugs from the article filename, so it helps to keep names short and descriptive:
+
+- `deploying-to-vercel/deploying-to-vercel.mdx`
+- `editing-site-config/editing-site-config.mdx`
+- `using-mdx-components/using-mdx-components.mdx`
+
+Use the same slug for the folder and the article file so routes stay obvious:
+
+- `release-workflow/release-workflow.mdx` -> `/getting-started/compass-docs/release-workflow`
+- `design-tokens/design-tokens.mdx` -> `/getting-started/compass-docs/design-tokens`
+
+This works well when the folder also contains screenshots or diagrams for that article.
+
+## Match folders to category slugs
+
+Inside `src/content/docs`, each top-level folder should match a sub-category slug from `src/data/docs.ts`:
+
+- `start-here`
+- `compass-docs`
+- `components`
+- `channels-and-apps`
+
+The parent sections such as `getting-started` and `integrations` live in `src/data/docs.ts` and drive navigation, but they are not used as content folder names.
+
+## Suggested maintenance rhythm
+
+- update categories when the docs structure changes
+- update articles when the product or repo changes
+- run `npm run check` before merging content changes

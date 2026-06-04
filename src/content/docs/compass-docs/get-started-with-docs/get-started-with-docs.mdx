@@ -1,12 +1,12 @@
 ---
 title: "Write Your First Article"
 description: "Create a real Compass article, connect it to a category, and see how it appears across the site."
-category: "docs"
+category: "compass-docs"
 order: 1
 updatedAt: 2026-06-03
 ---
 
-Every article in Compass is just a Markdown or MDX file with a little frontmatter. Once you add one document and connect it to a category, the homepage, sidebar, and article route all update automatically.
+Every article in Compass lives in its own folder with a slug-matched `.mdx` entry file. Once you add one document and connect it to a category, the homepage, sidebar, and article route all update automatically.
 
 <Callout tone="success">
   Keep simple guides in Markdown. Reach for MDX when a page needs richer callouts, steps, tabs, accordions, or structured presentation beyond standard prose.
@@ -38,13 +38,26 @@ Below the frontmatter, write normal Markdown or MDX content:
 - Verify links and metadata
 ```
 
+## Start with the article folder
+
+Create the article inside the folder for its category slug:
+
+```text
+src/content/docs/compass-docs/release-workflow/
+|-- release-workflow.mdx
+|-- approval-flow.png
+`-- dashboard-overview.png
+```
+
+Compass uses this structure for all articles so routes stay predictable and images can live right beside the content that uses them.
+
 ## Where it shows up
 
 Once saved, the article will appear in:
 
 - the category page for its `category`
 - the sidebar for that section
-- the direct article route generated from the filename
+- the direct article route generated from the article filename
 
 ## MDX when you need more than Markdown
 

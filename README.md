@@ -73,13 +73,20 @@ Update these before publishing:
 
 Documentation content lives in `src/content/docs`.
 
-Each article is an `.md` or `.mdx` file with frontmatter like this:
+Each article lives in its own folder with a slug-matched `.mdx` file:
+
+```text
+src/content/docs/compass-docs/get-started-with-docs/
+`-- get-started-with-docs.mdx
+```
+
+Inside that article file, use frontmatter like this:
 
 ```mdx
 ---
-title: "Setting Up Compass"
+title: "Set Up Compass"
 description: "Start customizing the theme and content structure."
-category: "setting-up-compass"
+category: "start-here"
 order: 1
 updatedAt: 2026-06-03
 ---
@@ -87,12 +94,46 @@ updatedAt: 2026-06-03
 ## Add your content here
 ```
 
+If an article includes screenshots or diagrams, keep them beside the article entry:
+
+```text
+src/content/docs/compass-docs/adding-images/
+|-- adding-images.mdx
+`-- docs-image-placeholder.png
+```
+
+Compass uses this folder-per-article pattern everywhere so contributors never have to choose between flat files and nested entries. It also keeps article-owned images in `src/`, where Astro can optimize them and generate responsive output.
+
+Inside MDX, use either a relative Markdown image:
+
+```mdx
+![Diagram](./docs-image-placeholder.png)
+```
+
+or Astro's image component when you need more control:
+
+```mdx
+import { Image } from 'astro:assets';
+import diagram from './docs-image-placeholder.png';
+
+<Image src={diagram} alt="Diagram" width={1200} layout="constrained" />
+```
+
+Use `public/` only for assets that need a stable direct URL and should not be processed by Astro, such as favicons or Open Graph images.
+
 Categories are defined in [src/data/docs.ts](./src/data/docs.ts). That file powers:
 
 - homepage cards
 - top-level category organization
 - sidebar navigation
 - category and article route generation
+
+The content tree mirrors those category slugs:
+
+- `src/content/docs/start-here`
+- `src/content/docs/compass-docs`
+- `src/content/docs/components`
+- `src/content/docs/channels-and-apps`
 
 ## Reusable Components
 
@@ -137,6 +178,7 @@ If you add your own Astro component, register it there to make it available insi
 
 - `site.config.mjs` still contains placeholder URLs by default.
 - `astro.config.mjs` uses the value from `site.config.mjs` for the canonical site URL.
+- `astro.config.mjs` enables responsive local images by default with Astro's image pipeline.
 - `npm run build` generates the static site, sitemap, and Pagefind search bundle.
 - If you plan to publish this package, update the package metadata in `package.json`.
 

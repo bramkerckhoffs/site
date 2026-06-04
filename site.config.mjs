@@ -3,6 +3,7 @@ const site = {
   title: 'Compass Docs Theme',
   description: 'A clean Astro documentation theme with MDX content, fast navigation, and Tailwind CSS styling.',
   siteUrl: 'https://example.com',
+  ogImage: '/og-image.png',
   githubUrl: 'https://github.com/andreialba/compass',
   navCtaLabel: 'View Repository',
   navCtaHref: 'https://github.com/andreialba/compass',
