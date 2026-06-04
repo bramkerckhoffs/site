@@ -11,6 +11,7 @@ Syntax highlighting is part of the writing experience in Compass, so it fits bet
 ## Use in MDX
 
 To highlight a snippet, write a fenced code block and add the language name after the opening backticks.
+Compass reads that language and shows it as a small label in the code block header, so readers do not need the prose to explain what `ts`, `bash`, or `json` means.
 
 This first example is the raw Markdown you type into the article:
 
@@ -22,7 +23,7 @@ export function formatTitle(title: string) {
 ```
 ````
 
-And this is how that same snippet renders on the page:
+And this is how that same snippet renders on the page, with the language shown in the header automatically:
 
 ```ts
 export function formatTitle(title: string) {
@@ -37,7 +38,7 @@ Compass uses Astro's built-in Markdown highlighting through `shikiConfig` in `as
 If you want to change the theme or code presentation later, update:
 
 - `astro.config.mjs` for Shiki theme configuration
-- `src/index.css` for code block styling
+- `src/index.css` for the code block frame, language label, and copy button styling
 
 ## More Preview
 

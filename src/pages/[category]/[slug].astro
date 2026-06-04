@@ -93,6 +93,25 @@ const sidebarSections = parent
 </Layout>
 
 <script is:inline>
+  const codeLanguageLabels = {
+    astro: 'Astro',
+    bash: 'Bash',
+    css: 'CSS',
+    html: 'HTML',
+    js: 'JavaScript',
+    json: 'JSON',
+    jsx: 'JSX',
+    md: 'Markdown',
+    mdx: 'MDX',
+    sh: 'Shell',
+    text: 'Text',
+    ts: 'TypeScript',
+    tsx: 'TSX',
+    xml: 'XML',
+    yaml: 'YAML',
+    yml: 'YAML',
+  };
+
   const articleCodeBlocks = document.querySelectorAll('.astro-code');
 
   articleCodeBlocks.forEach((block) => {
@@ -101,6 +120,19 @@ const sidebarSections = parent
     const codeElement = block.querySelector('code');
     const codeText = codeElement?.textContent;
     if (!codeText) return;
+    const language = (block.dataset.language ?? '').trim().toLowerCase();
+    const languageLabel = codeLanguageLabels[language] ?? (language ? language.toUpperCase() : 'Code');
+
+    const header = document.createElement('div');
+    header.className = 'code-block-header';
+
+    const languageTab = document.createElement('span');
+    languageTab.className = 'code-block-language-tab';
+    languageTab.textContent = languageLabel;
+    languageTab.dataset.languageLong = languageLabel.length > 8 ? 'true' : 'false';
+
+    header.append(languageTab);
+    block.append(header);
 
     const copyButton = document.createElement('button');
     copyButton.type = 'button';

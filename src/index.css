@@ -35,6 +35,10 @@
   --color-control-text-hover: var(--color-accent);
   --color-code-block-bg: #ffffff;
   --color-code-block-border: rgb(226 232 240 / 0.9);
+  --color-code-header-border: rgb(226 232 240 / 0.95);
+  --color-code-header-text: #64748b;
+  --color-code-language-bg: transparent;
+  --color-code-language-text: var(--color-text-strong);
   --color-code-copy-bg: rgb(255 255 255 / 0.96);
   --color-code-copy-border: rgb(226 232 240 / 0.95);
   --color-code-copy-text: #475569;
@@ -111,6 +115,10 @@ html.dark {
   --color-control-text-hover: #f8fafc;
   --color-code-block-bg: #0f1726;
   --color-code-block-border: rgb(71 85 105 / 0.95);
+  --color-code-header-border: rgb(51 65 85 / 0.9);
+  --color-code-header-text: #8fa1c2;
+  --color-code-language-bg: transparent;
+  --color-code-language-text: var(--color-text-strong);
   --color-code-copy-bg: rgb(24 35 55 / 0.96);
   --color-code-copy-border: var(--color-border);
   --color-code-copy-text: #e2e8f0;
@@ -215,7 +223,7 @@ body {
   border-radius: 0;
   background-color: var(--color-code-block-bg) !important;
   box-shadow: none;
-  padding: 1rem 1.25rem;
+  padding: 3.5rem 1.25rem 1rem;
 }
 
 .astro-code code {
@@ -275,7 +283,7 @@ html.dark .astro-code span {
 
 .code-block-copy {
   position: absolute;
-  top: 0.75rem;
+  top: 0.625rem;
   right: 0.75rem;
   display: inline-flex;
   height: 2.25rem;
@@ -291,6 +299,38 @@ html.dark .astro-code span {
 .code-block-copy svg {
   height: 1rem;
   width: 1rem;
+}
+
+.code-block-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  border-bottom: 1px solid var(--color-code-header-border);
+  padding: 0.625rem 4rem 0.625rem 0.75rem;
+  pointer-events: none;
+}
+
+.code-block-language-tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.875rem;
+  background: var(--color-code-language-bg);
+  color: var(--color-code-language-text);
+  padding: 0.15rem 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.code-block-language-tab[data-language-long='true'] {
+  letter-spacing: 0.04em;
+  text-transform: none;
 }
 
 .search-input,
