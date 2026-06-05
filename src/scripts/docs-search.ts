@@ -32,6 +32,8 @@ type SearchEntry = {
 type SearchElements = {
   input: HTMLInputElement;
   results: HTMLDivElement;
+  submitButton: HTMLButtonElement | null;
+  status: HTMLElement | null;
 };
 
 const MAX_RESULTS = 8;
@@ -76,12 +78,19 @@ const getPagefind = () => {
 const getSearchElements = (root: HTMLElement): SearchElements | null => {
   const input = root.querySelector('[data-search-input]');
   const results = root.querySelector('[data-search-results]');
+  const submitButton = root.querySelector('[data-search-submit]');
+  const status = root.querySelector('[data-search-status]');
 
   if (!(input instanceof HTMLInputElement) || !(results instanceof HTMLDivElement)) {
     return null;
   }
 
-  return { input, results };
+  return {
+    input,
+    results,
+    submitButton: submitButton instanceof HTMLButtonElement ? submitButton : null,
+    status: status instanceof HTMLElement ? status : null,
+  };
 };
 
 const isEditableTarget = (target: EventTarget | null) => {
@@ -137,23 +146,61 @@ const bindSearchShortcuts = () => {
   });
 };
 
-const renderEmptyState = (results: HTMLDivElement, message: string) => {
-  results.innerHTML = `<p class="px-4 py-4 text-sm text-[var(--color-text-muted)]">${escapeHtml(message)}</p>`;
-  results.classList.remove('hidden');
+const setResultsVisibility = (input: HTMLInputElement, results: HTMLDivElement, isVisible: boolean) => {
+  results.classList.toggle('hidden', !isVisible);
+  results.setAttribute('aria-hidden', String(!isVisible));
+  input.setAttribute('aria-expanded', String(isVisible));
 };
 
-const renderResults = (results: HTMLDivElement, entries: SearchEntry[]) => {
-  results.innerHTML = entries
+const announceStatus = (status: HTMLElement | null, message = '') => {
+  if (status) {
+    status.textContent = message;
+  }
+};
+
+const hideResults = (input: HTMLInputElement, results: HTMLDivElement, status?: HTMLElement | null) => {
+  results.innerHTML = '';
+  setResultsVisibility(input, results, false);
+  announceStatus(status ?? null, '');
+};
+
+const renderEmptyState = (
+  input: HTMLInputElement,
+  results: HTMLDivElement,
+  status: HTMLElement | null,
+  message: string,
+) => {
+  results.innerHTML = `<p class="px-4 py-4 text-sm text-[var(--color-text-muted)]">${escapeHtml(message)}</p>`;
+  setResultsVisibility(input, results, true);
+  announceStatus(status, message);
+};
+
+const renderResults = (
+  input: HTMLInputElement,
+  results: HTMLDivElement,
+  status: HTMLElement | null,
+  entries: SearchEntry[],
+  label = 'Search results',
+) => {
+  results.innerHTML = `
+    <ul class="divide-y divide-[var(--color-border)]" aria-label="${escapeHtml(label)}">
+      ${entries
     .map(
       (entry) => `
-        <a href="${escapeHtml(entry.url)}" class="block px-4 py-3 transition-colors hover:bg-[var(--color-hover-surface)]">
-          <div class="search-result-title text-sm font-medium text-[var(--color-accent)]">${escapeHtml(entry.title)}</div>
-          ${entry.excerpt ? `<div class="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">${escapeHtml(entry.excerpt)}</div>` : ''}
-        </a>
+        <li>
+          <a href="${escapeHtml(entry.url)}" class="block px-4 py-3 transition-colors hover:bg-[var(--color-hover-surface)]">
+            <div class="search-result-title text-sm font-medium text-[var(--color-accent)]">${escapeHtml(entry.title)}</div>
+            <div class="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-[var(--color-text-soft)]">${escapeHtml(entry.category)}</div>
+            ${entry.excerpt ? `<div class="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">${escapeHtml(entry.excerpt)}</div>` : ''}
+          </a>
+        </li>
       `,
     )
-    .join('');
-  results.classList.remove('hidden');
+    .join('')}
+    </ul>
+  `;
+  setResultsVisibility(input, results, true);
+  announceStatus(status, `${entries.length} ${entries.length === 1 ? 'result' : 'results'} available.`);
 };
 
 const getSuggestions = (root: HTMLElement): SearchEntry[] => {
@@ -180,21 +227,31 @@ const getSearchPreviews = (root: HTMLElement) => {
   }
 };
 
-const renderSuggestions = (root: HTMLElement, results: HTMLDivElement) => {
+const renderSuggestions = (
+  root: HTMLElement,
+  input: HTMLInputElement,
+  results: HTMLDivElement,
+  status: HTMLElement | null,
+) => {
   const suggestions = getSuggestions(root);
   if (suggestions.length === 0) {
-    results.classList.add('hidden');
-    results.innerHTML = '';
+    hideResults(input, results, status);
     return;
   }
 
-  renderResults(results, suggestions);
+  renderResults(input, results, status, suggestions, 'Suggested articles');
+  announceStatus(status, `${suggestions.length} suggested ${suggestions.length === 1 ? 'article' : 'articles'} available.`);
 };
 
-const setSearchUnavailable = (input: HTMLInputElement, results: HTMLDivElement, message: string) => {
+const setSearchUnavailable = (
+  input: HTMLInputElement,
+  results: HTMLDivElement,
+  status: HTMLElement | null,
+  message: string,
+) => {
   input.disabled = true;
   input.setAttribute('aria-disabled', 'true');
-  renderEmptyState(results, message);
+  renderEmptyState(input, results, status, message);
 };
 
 const searchPagefind = async (
@@ -227,34 +284,18 @@ const attachSearch = (root: HTMLElement) => {
   const elements = getSearchElements(root);
   if (!elements) return;
 
-  const { input, results } = elements;
+  const { input, results, submitButton, status } = elements;
   const emptyMessage = root.dataset.searchEmpty ?? 'No matching articles found.';
   const errorMessage = root.dataset.searchError ?? 'Search is temporarily unavailable.';
   const searchPreviews = getSearchPreviews(root);
   let latestQuery = '';
 
-  input.addEventListener(
-    'focus',
-    () => {
-      void getPagefind();
-      if (!input.value.trim()) {
-        renderSuggestions(root, results);
-      }
-    },
-  );
-
-  input.addEventListener('click', () => {
-    if (!input.value.trim()) {
-      renderSuggestions(root, results);
-    }
-  });
-
-  input.addEventListener('input', async () => {
+  const runSearch = async () => {
     const query = input.value.trim();
     latestQuery = query;
 
     if (!query) {
-      renderSuggestions(root, results);
+      renderSuggestions(root, input, results, status);
       return;
     }
 
@@ -266,24 +307,62 @@ const attachSearch = (root: HTMLElement) => {
     }
 
     if (matches === null) {
-      setSearchUnavailable(input, results, errorMessage);
+      setSearchUnavailable(input, results, status, errorMessage);
       return;
     }
 
     if (matches.length === 0) {
-      renderEmptyState(results, emptyMessage);
+      renderEmptyState(input, results, status, emptyMessage);
       return;
     }
 
-    renderResults(results, matches);
+    renderResults(input, results, status, matches);
+  };
+
+  input.addEventListener(
+    'focus',
+    () => {
+      void getPagefind();
+      if (!input.value.trim()) {
+        renderSuggestions(root, input, results, status);
+      }
+    },
+  );
+
+  input.addEventListener('click', () => {
+    if (!input.value.trim()) {
+      renderSuggestions(root, input, results, status);
+    }
+  });
+
+  input.addEventListener('input', () => {
+    void runSearch();
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      hideResults(input, results, status);
+      input.blur();
+    }
+  });
+
+  submitButton?.addEventListener('click', () => {
+    input.focus();
+    void runSearch();
   });
 
   document.addEventListener('click', (event) => {
     const target = event.target;
     if (!(target instanceof Node)) return;
     if (!root.contains(target)) {
-      results.classList.add('hidden');
+      hideResults(input, results);
     }
+  });
+
+  root.addEventListener('focusout', (event) => {
+    const nextTarget = event.relatedTarget;
+    if (nextTarget instanceof Node && root.contains(nextTarget)) return;
+    hideResults(input, results);
   });
 };
 

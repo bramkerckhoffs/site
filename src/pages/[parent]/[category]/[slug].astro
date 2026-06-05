@@ -241,11 +241,45 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
     document.body.append(lightboxOverlay);
 
     let lastTrigger = null;
+    const inertTargets = Array.from(document.body.children).filter(
+      (child) => child !== lightboxOverlay,
+    );
+
+    const getFocusableElements = () =>
+      Array.from(
+        lightboxDialog.querySelectorAll(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => element instanceof HTMLElement);
+
+    const setBackgroundInert = (isInert) => {
+      inertTargets.forEach((target) => {
+        if (!(target instanceof HTMLElement)) return;
+
+        if (isInert) {
+          target.dataset.lightboxPrevAriaHidden = target.getAttribute('aria-hidden') ?? '';
+          target.inert = true;
+          target.setAttribute('aria-hidden', 'true');
+        } else {
+          target.inert = false;
+          const previousAriaHidden = target.dataset.lightboxPrevAriaHidden;
+
+          if (previousAriaHidden) {
+            target.setAttribute('aria-hidden', previousAriaHidden);
+          } else {
+            target.removeAttribute('aria-hidden');
+          }
+
+          delete target.dataset.lightboxPrevAriaHidden;
+        }
+      });
+    };
 
     const closeLightbox = () => {
       lightboxOverlay.hidden = true;
       lightboxOverlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      setBackgroundInert(false);
       lightboxImage.removeAttribute('src');
       lightboxImage.removeAttribute('srcset');
       if (lastTrigger instanceof HTMLElement) lastTrigger.focus();
@@ -272,6 +306,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
       lightboxOverlay.hidden = false;
       lightboxOverlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      setBackgroundInert(true);
       lightboxDialog.focus();
     };
 
@@ -305,7 +340,33 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
       if (event.target === lightboxOverlay) closeLightbox();
     });
     document.addEventListener('keydown', (event) => {
-      if (!lightboxOverlay.hidden && event.key === 'Escape') closeLightbox();
+      if (lightboxOverlay.hidden) return;
+
+      if (event.key === 'Escape') {
+        closeLightbox();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusableElements = getFocusableElements();
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        lightboxDialog.focus();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
     });
   }
 </script>

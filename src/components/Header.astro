@@ -140,10 +140,21 @@ function isActiveNavItem(href: string) {
   const mobileMenuPanel = document.getElementById('mobile-menu-panel');
 
   if (mobileMenuToggle instanceof HTMLButtonElement && mobileMenuPanel instanceof HTMLDivElement) {
+    const setMobileMenuOpen = (isOpen) => {
+      mobileMenuPanel.classList.toggle('hidden', !isOpen);
+      mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+    };
+
     mobileMenuToggle.addEventListener('click', () => {
       const isOpen = !mobileMenuPanel.classList.contains('hidden');
-      mobileMenuPanel.classList.toggle('hidden', isOpen);
-      mobileMenuToggle.setAttribute('aria-expanded', String(!isOpen));
+      setMobileMenuOpen(isOpen);
+    });
+
+    mobileMenuPanel.addEventListener('focusout', (event) => {
+      const nextTarget = event.relatedTarget;
+      if (nextTarget instanceof Node && mobileMenuPanel.contains(nextTarget)) return;
+      if (nextTarget === mobileMenuToggle) return;
+      setMobileMenuOpen(false);
     });
   }
 
