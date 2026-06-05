@@ -51,7 +51,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
 ---
 
 <Layout title={`${doc.data.title} | ${categoryData?.name ?? doc.data.category}`} description={doc.data.description}>
-  <div class="mx-auto flex max-w-[1280px] flex-col gap-10 px-4 py-10 md:flex-row md:px-8">
+  <div class="mx-auto flex max-w-[1280px] flex-col gap-10 px-4 py-10 lg:flex-row lg:px-8">
     <Sidebar
       sections={sidebarSections}
       activeCategory={doc.data.category}
@@ -71,11 +71,11 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
       </nav>
 
       <article
-        class="site-panel docs-article rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10"
+        class="site-panel docs-article rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 lg:p-10"
         data-pagefind-body
         data-pagefind-meta={`category:${pagefindCategory}`}
       >
-        <h1 class="text-4xl font-semibold tracking-tight text-[var(--color-text-strong)] md:text-5xl">{doc.data.title}</h1>
+        <h1 class="text-4xl font-semibold tracking-tight text-[var(--color-text-strong)] lg:text-5xl">{doc.data.title}</h1>
         {doc.data.description && (
           <p class="mt-5 max-w-2xl text-base leading-7 text-[var(--color-text)]">{doc.data.description}</p>
         )}
@@ -96,13 +96,18 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
 
         {(previousDoc || nextDoc) && (
           <nav class="docs-article-pagination mt-10 border-t border-[var(--color-border)] pt-6" aria-label="Article navigation">
-            <div class="grid gap-3 md:grid-cols-2">
+            <div class="grid gap-4 md:grid-cols-2">
               {previousDoc ? (
                 <a
                   href={getArticleHref(previousDoc.data.category, getCleanDocSlug(previousDoc.id))}
                   class="docs-article-pagination-link"
                 >
-                  <span class="docs-article-pagination-label">Previous article</span>
+                  <span class="docs-article-pagination-label">
+                    <svg class="docs-article-pagination-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <use href="/icons/docs-navigation.svg#arrow-left"></use>
+                    </svg>
+                    Previous article
+                  </span>
                   <span class="docs-article-pagination-title">{previousDoc.data.title}</span>
                 </a>
               ) : (
@@ -112,9 +117,14 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
               {nextDoc && (
                 <a
                   href={getArticleHref(nextDoc.data.category, getCleanDocSlug(nextDoc.id))}
-                  class="docs-article-pagination-link md:text-right"
+                  class="docs-article-pagination-link docs-article-pagination-link-next"
                 >
-                  <span class="docs-article-pagination-label">Next article</span>
+                  <span class="docs-article-pagination-label">
+                    Next article
+                    <svg class="docs-article-pagination-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <use href="/icons/docs-navigation.svg#arrow-right"></use>
+                    </svg>
+                  </span>
                   <span class="docs-article-pagination-title">{nextDoc.data.title}</span>
                 </a>
               )}

@@ -9,6 +9,11 @@ The format is based on Keep a Changelog, and this project follows semantic versi
 ### Added
 - Previous and next article navigation on docs pages, ordered by each section's article sequence.
 
+### Changed
+- Refined article navigation styling with lighter inline links and locally hosted arrow icons.
+- Shifted docs and category page layouts to a larger responsive breakpoint so mid-sized screens give the content more room.
+- Replaced Manrope with locally hosted Geist Sans and Geist Mono.
+
 ## [0.1.1] - 2026-06-05
 
 ### Added

@@ -42,7 +42,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
 ---
 
 <Layout title={`${subcategory?.name ?? category} | ${parent?.name ?? 'Compass'}`}>
-  <div class="mx-auto flex max-w-[1280px] flex-col gap-10 px-4 py-10 md:flex-row md:px-8">
+  <div class="mx-auto flex max-w-[1280px] flex-col gap-10 px-4 py-10 lg:flex-row lg:px-8">
     {parent && (
       <Sidebar
         sections={sections}
@@ -53,7 +53,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
     )}
 
     <div class="min-w-0 flex-1">
-      <section class="site-panel rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
+      <section class="site-panel rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 lg:p-10">
         <nav class="docs-breadcrumbs mb-6 flex flex-wrap items-center gap-2 text-sm text-[var(--color-text-muted)]">
           <a href="/" class="breadcrumb-link transition hover:text-[var(--color-accent)]">Home</a>
           <span>/</span>
