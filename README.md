@@ -57,6 +57,11 @@ npm run check
 npm run clean
 ```
 
+## Project Docs
+
+- [Contributing guide](./CONTRIBUTING.md)
+- [Changelog](./CHANGELOG.md)
+
 ## Theme Setup
 
 The main theme settings live in [site.config.mjs](./site.config.mjs).

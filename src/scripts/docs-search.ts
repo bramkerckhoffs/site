@@ -190,7 +190,6 @@ const renderResults = (
         <li>
           <a href="${escapeHtml(entry.url)}" class="block px-4 py-3 transition-colors hover:bg-[var(--color-hover-surface)]">
             <div class="search-result-title text-sm font-medium text-[var(--color-accent)]">${escapeHtml(entry.title)}</div>
-            <div class="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-[var(--color-text-soft)]">${escapeHtml(entry.category)}</div>
             ${entry.excerpt ? `<div class="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">${escapeHtml(entry.excerpt)}</div>` : ''}
           </a>
         </li>
