@@ -33,7 +33,6 @@ Compass is a clean Astro documentation theme for product docs, support centers, 
 - `@astrojs/sitemap`
 - `tailwindcss`
 - `@tailwindcss/typography`
-- `@fontsource-variable/manrope`
 - `pagefind`
 - `typescript`
 
