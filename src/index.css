@@ -514,12 +514,15 @@ html.dark .astro-code[data-language='text'] span {
   text-decoration: none;
   transition:
     opacity 150ms ease,
-    color 150ms ease,
-    transform 150ms ease;
+    color 150ms ease;
 }
 
 .docs-article-pagination-link:hover {
-  transform: translateY(-1px);
+  color: var(--color-accent);
+}
+
+.docs-article-pagination-link:hover .docs-article-pagination-label,
+.docs-article-pagination-link:hover .docs-article-pagination-icon {
   color: var(--color-accent);
 }
 
