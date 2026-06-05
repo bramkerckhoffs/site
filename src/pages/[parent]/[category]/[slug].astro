@@ -258,16 +258,6 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
     lightboxDialog.setAttribute('aria-label', 'Expanded article image');
     lightboxDialog.tabIndex = -1;
 
-    const lightboxClose = document.createElement('button');
-    lightboxClose.type = 'button';
-    lightboxClose.className = 'docs-lightbox-close';
-    lightboxClose.setAttribute('aria-label', 'Close expanded image');
-    lightboxClose.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m8 8 8 8M16 8l-8 8"></path>
-      </svg>
-    `;
-
     const lightboxFigure = document.createElement('figure');
     lightboxFigure.className = 'docs-lightbox-figure';
 
@@ -280,7 +270,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
     lightboxCaption.hidden = true;
 
     lightboxFigure.append(lightboxImage, lightboxCaption);
-    lightboxDialog.append(lightboxClose, lightboxFigure);
+    lightboxDialog.append(lightboxFigure);
     lightboxOverlay.append(lightboxBackdrop, lightboxDialog);
     document.body.append(lightboxOverlay);
 
@@ -379,7 +369,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
     });
 
     lightboxBackdrop.addEventListener('click', closeLightbox);
-    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxImage.addEventListener('click', closeLightbox);
     lightboxOverlay.addEventListener('click', (event) => {
       if (event.target === lightboxOverlay) closeLightbox();
     });

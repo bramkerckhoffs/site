@@ -4,10 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows semantic versioning when tagged or released.
 
-## [Unreleased]
+## [0.1.2] - 2026-06-05
 
 ### Added
-- Previous and next article navigation on docs pages, ordered by each section's article sequence.
+- Image lightbox expansion with click-to-zoom behavior; click the expanded image or anywhere outside it to zoom out.
 
 ### Changed
 - Refined article navigation styling with lighter inline links and locally hosted arrow icons.
@@ -15,6 +15,7 @@ The format is based on Keep a Changelog, and this project follows semantic versi
 - Replaced Manrope with locally hosted Geist Sans and Geist Mono.
 - Updated secondary `ButtonLink` styles to use a transparent background with a visible border in light and dark mode.
 - Renamed docs article slugs to match titles for `write-your-first-article` and `set-up-compass`.
+- Removed animation from previous/next article hover state; article title and icon now turn blue on hover.
 
 ## [0.1.1] - 2026-06-05
 

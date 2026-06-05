@@ -651,6 +651,7 @@ html.dark .astro-code[data-language='text'] span {
   border-radius: var(--radius-ui);
   background: var(--color-surface);
   box-shadow: 0 24px 70px -28px rgb(15 23 42 / 0.7);
+  cursor: zoom-out;
 }
 
 .docs-lightbox-caption {
