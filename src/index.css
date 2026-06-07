@@ -351,17 +351,27 @@ html.dark .astro-code[data-language='text'] span {
   color: var(--color-control-text-hover);
 }
 
-#mobile-menu-toggle,
 .code-block-copy {
   border: 1px solid var(--color-control-border);
   background: var(--color-control-bg);
   color: var(--color-control-text);
 }
 
-#mobile-menu-toggle:hover,
 .code-block-copy:hover {
   background: var(--color-control-bg-hover);
   color: var(--color-control-text-hover);
+}
+
+#mobile-menu-toggle {
+  border: 0;
+  background: transparent;
+  color: var(--color-control-text);
+}
+
+#mobile-menu-toggle:hover,
+#mobile-menu-toggle[aria-expanded='true'] {
+  background: transparent;
+  color: var(--color-control-text);
 }
 
 .code-block-copy {
