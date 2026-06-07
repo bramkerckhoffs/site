@@ -8,6 +8,8 @@ The format is based on Keep a Changelog, and this project follows semantic versi
 
 ### Added
 - Added a reusable `CodeTabs` MDX component for package manager, framework, and command-variant code examples.
+- Added a reusable `FileTree` MDX component for showing repo structure and article-owned file paths.
+- Added a reusable `Badge` MDX component for inline status labels like new, beta, required, and deprecated.
 
 ### Changed
 - Added an optional `/rss.xml` feed for recent docs updates using article `updatedAt` metadata.
@@ -16,6 +18,7 @@ The format is based on Keep a Changelog, and this project follows semantic versi
 - Reused a shared sidebar section helper across docs routes and made the header brand label follow `site.config.mjs`.
 - Unified small UI labels like category headings, sidebar labels, article meta, and the 404 marker under the same mono sentence-case treatment.
 - Hid article heading link icons on mobile so wrapped H2 headings keep cleaner spacing.
+- Matched the standard `Tabs` active state underline to the existing `CodeTabs` treatment.
 
 ## [0.1.3] - 2026-06-05
 
