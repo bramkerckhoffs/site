@@ -316,6 +316,14 @@ const articlePagefindAttributes = doc.data.hideFromSearch
   if (tocHeadingTargets.length > 0) {
     const updateCurrentHeading = () => {
       const scrollOffset = 140;
+      const scrolledToBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+      if (scrolledToBottom) {
+        setCurrentTocHeading(tocHeadingTargets[tocHeadingTargets.length - 1].slug);
+        return;
+      }
+
       let activeHeading = tocHeadingTargets[0];
 
       tocHeadingTargets.forEach((entry) => {
