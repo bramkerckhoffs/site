@@ -118,7 +118,7 @@ const articlePagefindAttributes = doc.data.hideFromSearch
       </nav>
 
       <article
-        class="site-panel docs-article rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 lg:p-10"
+        class="site-panel docs-article rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 lg:p-10"
         {...articlePagefindAttributes}
       >
         <h1 class="text-4xl font-semibold tracking-tight text-[var(--color-text-strong)] lg:text-5xl">{doc.data.title}</h1>
@@ -127,7 +127,7 @@ const articlePagefindAttributes = doc.data.hideFromSearch
         )}
 
         {doc.data.heroImage && (
-          <div class="mt-8 overflow-hidden rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface-muted)]">
+          <div class="mt-8 overflow-hidden rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface-muted)]">
             <Image
               src={doc.data.heroImage}
               alt=""

@@ -44,7 +44,7 @@ const searchId = `search-hero-${Math.random().toString(36).slice(2, 10)}`;
         id={`${searchId}-input`}
         type="search"
         data-search-input
-        class="search-input block w-full rounded-[15px] border border-[var(--color-border-strong)] bg-[var(--color-surface)] py-4 pl-12 pr-28 text-base text-[var(--color-search-text)] outline-none transition-all placeholder:text-[var(--color-search-placeholder)] focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 md:text-lg"
+        class="search-input block w-full rounded-[10px] border border-[var(--color-border-strong)] bg-[var(--color-surface)] py-4 pl-12 pr-28 text-base text-[var(--color-search-text)] outline-none transition-all placeholder:text-[var(--color-search-placeholder)] focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 md:text-lg"
         placeholder={placeholder}
         autocomplete="off"
         aria-describedby={`${searchId}-hint ${searchId}-status`}
@@ -52,14 +52,14 @@ const searchId = `search-hero-${Math.random().toString(36).slice(2, 10)}`;
       <button
         type="button"
         data-search-submit
-        class="search-submit absolute bottom-2 right-2 top-2 cursor-pointer rounded-[15px] bg-[var(--color-brand)] px-6 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-brand-hover)]"
+        class="search-submit absolute bottom-2 right-2 top-2 cursor-pointer rounded-[10px] bg-[var(--color-brand)] px-6 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-brand-hover)]"
       >
         Search
       </button>
       <div
         id={`${searchId}-results`}
         data-search-results
-        class="search-results absolute left-0 right-0 top-full z-50 mt-2 hidden max-h-96 overflow-y-auto rounded-[15px] border border-[var(--color-border)] bg-[var(--color-surface)] text-left"
+        class="search-results absolute left-0 right-0 top-full z-50 mt-2 hidden max-h-96 overflow-y-auto rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] text-left"
         role="region"
         aria-label="Search results"
         aria-hidden="true"

@@ -23,11 +23,11 @@
   --docs-header-height: 4rem;
 
   /* Shared component radius for cards, panels, controls, and docs UI. */
-  --radius-ui: 10px;
-  --color-canvas: #fafaf9;
+  --radius-ui: 15px;
+  --color-canvas: #f8fafc;
   --color-surface: #ffffff;
-  --color-surface-muted: #fafaf9;
-  --color-soft: #f5f3ff;
+  --color-surface-muted: #f8fafc;
+  --color-soft: #eff6ff;
   --color-ink: #0f172a;
   --color-text-strong: #0f172a;
   --color-text: #334155;
@@ -35,18 +35,18 @@
   --color-text-soft: #94a3b8;
   --color-ui-label: #475569;
   --color-text-inverse: #ffffff;
-  --color-brand: #7c3aed;
-  --color-brand-hover: #6d28d9;
-  --color-accent: #7c3aed;
-  --color-accent-hover: #6d28d9;
-  --color-accent-soft: rgb(124 58 237 / 0.2);
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-soft: rgb(59 130 246 / 0.2);
   --color-border: rgb(226 232 240 / 0.9);
   --color-border-strong: rgb(203 213 225 / 0.92);
-  --color-hover-surface: #f5f3ff;
+  --color-hover-surface: #eff6ff;
   --color-search-text: #0f172a;
   --color-search-placeholder: #94a3b8;
   --color-control-bg: rgb(255 255 255 / 0.96);
-  --color-control-bg-hover: rgb(245 243 255 / 1);
+  --color-control-bg-hover: rgb(239 246 255 / 1);
   --color-control-border: rgb(226 232 240 / 0.95);
   --color-control-text: #475569;
   --color-control-text-hover: var(--color-accent);
@@ -65,8 +65,8 @@
   --color-pagination-bg: #ffffff;
   --color-pagination-border: rgb(226 232 240 / 0.95);
   --color-pagination-text: #475569;
-  --color-pagination-bg-active: rgb(245 243 255 / 1);
-  --color-pagination-border-active: rgb(196 181 253 / 1);
+  --color-pagination-bg-active: rgb(239 246 255 / 1);
+  --color-pagination-border-active: rgb(191 219 254 / 1);
   --color-pagination-text-active: var(--color-accent);
   --color-breadcrumb-separator: #94a3b8;
   --color-link-subtle: #334155;
@@ -103,11 +103,11 @@
   --color-step-body: #525252;
   --color-tab-text: #334155;
   --color-tab-hover: #0f172a;
-  --color-tab-active: #7c3aed;
-  --color-code-tab-bg: #fafaf9;
-  --color-code-tab-bg-hover: #f5f3ff;
+  --color-tab-active: #2563eb;
+  --color-code-tab-bg: #f8fafc;
+  --color-code-tab-bg-hover: #eff6ff;
   --color-code-tab-border: rgb(226 232 240 / 0.95);
-  --color-code-tab-panel-bg: #fafaf9;
+  --color-code-tab-panel-bg: #f8fafc;
   color-scheme: light;
 }
 
@@ -123,18 +123,18 @@ html.dark {
   --color-text-soft: #8fa1c2;
   --color-ui-label: #a5b4cf;
   --color-text-inverse: #ffffff;
-  --color-brand: #7c3aed;
-  --color-brand-hover: #6d28d9;
-  --color-accent: #c4b5fd;
-  --color-accent-hover: #a78bfa;
-  --color-accent-soft: rgb(124 58 237 / 0.18);
+  --color-brand: #2563eb;
+  --color-brand-hover: #1d4ed8;
+  --color-accent: #93c5fd;
+  --color-accent-hover: #60a5fa;
+  --color-accent-soft: rgb(59 130 246 / 0.18);
   --color-border: rgb(59 72 97 / 0.62);
   --color-border-strong: rgb(82 98 128 / 0.72);
-  --color-hover-surface: rgb(124 58 237 / 0.14);
+  --color-hover-surface: rgb(37 99 235 / 0.14);
   --color-search-text: #f8fbff;
   --color-search-placeholder: #8fa1c2;
   --color-control-bg: rgb(24 35 55 / 0.96);
-  --color-control-bg-hover: rgb(124 58 237 / 0.16);
+  --color-control-bg-hover: rgb(37 99 235 / 0.16);
   --color-control-border: var(--color-border);
   --color-control-text: #e2e8f0;
   --color-control-text-hover: #f8fafc;
@@ -153,8 +153,8 @@ html.dark {
   --color-pagination-bg: var(--color-surface-muted);
   --color-pagination-border: var(--color-border);
   --color-pagination-text: #cbd5e1;
-  --color-pagination-bg-active: rgb(124 58 237 / 0.12);
-  --color-pagination-border-active: rgb(167 139 250 / 0.95);
+  --color-pagination-bg-active: rgb(37 99 235 / 0.12);
+  --color-pagination-border-active: rgb(96 165 250 / 0.95);
   --color-pagination-text-active: #ffffff;
   --color-breadcrumb-separator: #64748b;
   --color-link-subtle: #cbd5e1;
@@ -191,7 +191,7 @@ html.dark {
   --color-step-body: #cbd5e1;
   --color-tab-text: #cbd5e1;
   --color-tab-hover: #f8fafc;
-  --color-tab-active: #c4b5fd;
+  --color-tab-active: #93c5fd;
   --color-code-tab-bg: rgb(15 23 38 / 0.9);
   --color-code-tab-bg-hover: rgb(30 41 59 / 0.96);
   --color-code-tab-border: rgb(51 65 85 / 0.92);
@@ -213,7 +213,6 @@ html.dark {
 
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
 }
 
 body {
@@ -1515,45 +1514,5 @@ html.dark .astro-code[data-language='text'] span {
 }
 
 ::selection {
-  background: rgba(124, 58, 237, 0.18);
-}
-
-.sparkles-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.sparkle-dot {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--color-accent);
-  opacity: 0;
-  animation: sparkle-float ease-in-out infinite;
-  box-shadow: 0 0 6px 2px color-mix(in srgb, var(--color-accent) 60%, transparent);
-}
-
-@keyframes sparkle-float {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0;
-  }
-  18% {
-    opacity: var(--sparkle-opacity, 0.7);
-  }
-  82% {
-    opacity: var(--sparkle-opacity, 0.7);
-  }
-  100% {
-    transform: translateY(-55px) translateX(var(--sparkle-drift, 0px)) scale(0.3);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sparkle-dot {
-    animation: none;
-    opacity: 0;
-  }
+  background: rgba(59, 130, 246, 0.18);
 }

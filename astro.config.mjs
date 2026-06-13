@@ -6,6 +6,7 @@ import site from './site.config.mjs';
 
 export default defineConfig({
   site: site.siteUrl,
+  base: '/site',
   integrations: [mdx(), sitemap()],
   image: {
     layout: 'constrained',

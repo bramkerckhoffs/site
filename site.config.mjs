@@ -1,13 +1,13 @@
 const site = {
-  name: 'Compass',
-  title: 'Compass Docs Theme',
+  name: 'Kerckhoffs',
+  title: 'An engineer\'s reference library.',
   description: 'A clean Astro documentation theme with MDX content, fast navigation, and Tailwind CSS styling.',
-  siteUrl: 'https://compass-lilac-tau.vercel.app',
+  siteUrl: 'https://bramkerckhoffs.github.io/site',
   ogImage: '/og-image.png',
-  githubUrl: 'https://github.com/andreialba/compass',
+  githubUrl: 'https://github.com/bramkerckhoffs',
   navCtaLabel: 'View Repository',
-  navCtaHref: 'https://github.com/andreialba/compass',
-  footerText: 'Compass is an Astro docs theme built for product and support documentation.',
+  navCtaHref: 'https://github.com/bramkerckhoffs',
+  footerText: 'An engineer\'s reference library.',
 };
 
 export default site;
