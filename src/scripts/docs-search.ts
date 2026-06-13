@@ -39,7 +39,7 @@ type SearchElements = {
 
 const MAX_RESULTS = 8;
 const SEARCH_DEBOUNCE_MS = 150;
-const PAGEFIND_BUNDLE_URL = '/pagefind/pagefind.js';
+const PAGEFIND_BUNDLE_URL = `${import.meta.env.BASE_URL.replace(/\/+$/, '')}/pagefind/pagefind.js`;
 
 let pagefindPromise: Promise<PagefindApi | null> | undefined;
 let searchShortcutsBound = false;
