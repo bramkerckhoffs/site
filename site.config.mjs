@@ -1,7 +1,7 @@
 const site = {
   name: 'Kerckhoffs',
   title: 'An engineer\'s reference library.',
-  description: 'A clean Astro documentation theme with MDX content, fast navigation, and Tailwind CSS styling.',
+  description: 'A personal reference library for engineers — quick answers, runbooks, and documentation.',
   siteUrl: 'https://bramkerckhoffs.github.io/site',
   ogImage: '/og-image.png',
   githubUrl: 'https://github.com/bramkerckhoffs',

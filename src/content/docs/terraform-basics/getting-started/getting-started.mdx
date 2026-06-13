@@ -1,0 +1,91 @@
+---
+title: "Getting Started with Terraform"
+description: "Install Terraform, write your first configuration, and deploy infrastructure in minutes."
+category: "terraform-basics"
+order: 1
+updatedAt: 2026-06-13
+---
+
+Terraform is een tool waarmee je infrastructuur beschrijft als code (IaC). In plaats van handmatig servers, databases of netwerken aan te maken via een dashboard, schrijf je configuratiebestanden die Terraform uitvoert.
+
+## Installatie
+
+```bash
+# macOS via Homebrew
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+# Windows via Winget
+winget install Hashicorp.Terraform
+
+# Versie controleren
+terraform version
+```
+
+## Eerste configuratie
+
+Maak een bestand `main.tf` aan:
+
+```hcl
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+```
+
+## Basis workflow
+
+<Steps>
+  <Step title="Initialiseren">
+    Download de benodigde providers:
+
+    ```bash
+    terraform init
+    ```
+  </Step>
+
+  <Step title="Plan bekijken">
+    Bekijk wat Terraform gaat doen zonder iets uit te voeren:
+
+    ```bash
+    terraform plan
+    ```
+  </Step>
+
+  <Step title="Toepassen">
+    Voer de wijzigingen door:
+
+    ```bash
+    terraform apply
+    ```
+  </Step>
+
+  <Step title="Opruimen">
+    Verwijder alle aangemaakte resources:
+
+    ```bash
+    terraform destroy
+    ```
+  </Step>
+</Steps>
+
+## Handige commando's
+
+| Commando | Omschrijving |
+|---|---|
+| `terraform init` | Initialiseer werkmap en download providers |
+| `terraform plan` | Bekijk wijzigingen zonder toe te passen |
+| `terraform apply` | Wijzigingen doorvoeren |
+| `terraform destroy` | Alle resources verwijderen |
+| `terraform fmt` | Bestanden netjes opmaken |
+| `terraform validate` | Configuratie syntax controleren |
+| `terraform state list` | Alle resources in de state tonen |
+| `terraform output` | Outputs tonen |

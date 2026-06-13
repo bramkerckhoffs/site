@@ -9,6 +9,11 @@ export const docsParentCategories = [
     name: 'Integrations',
     description: 'Extend Compass with analytics, editorial systems, and optional tools around your docs workflow.',
   },
+  {
+    slug: 'terraform',
+    name: 'Terraform',
+    description: 'Infrastructure as code reference, modules, state management, and practical runbooks.',
+  },
 ] as const;
 
 export const docsCategories = [
@@ -39,6 +44,13 @@ export const docsCategories = [
     parent: 'integrations',
     description: 'Cover analytics, CMS-backed editing, embedded support surfaces, and other tools around your docs.',
     icon: 'grid',
+  },
+  {
+    name: 'Basics',
+    slug: 'terraform-basics',
+    parent: 'terraform',
+    description: 'Core Terraform concepts, CLI commands, and your first infrastructure deployments.',
+    icon: 'server',
   },
 ] as const;
 

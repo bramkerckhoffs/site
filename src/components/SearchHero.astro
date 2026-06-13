@@ -19,9 +19,9 @@ const {
 const searchId = `search-hero-${Math.random().toString(36).slice(2, 10)}`;
 ---
 
-<section class="search-hero bg-[var(--color-surface)] py-14 md:py-16">
+<section class="search-hero relative bg-[var(--color-surface)] py-14 md:py-16">
   <div class="mx-auto w-full max-w-[1280px] px-4 text-center md:px-8">
-    <h1 class="search-hero-title mb-6 text-4xl font-extrabold tracking-tight text-[var(--color-text-strong)] md:text-5xl">{title}</h1>
+    <h1 class="search-hero-title mb-6 text-4xl font-extrabold tracking-tight md:text-5xl" style="background: linear-gradient(135deg, var(--color-text-strong) 0%, var(--color-brand) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">{title}</h1>
 
     <div
       class="relative mx-auto w-full max-w-[600px]"
@@ -66,6 +66,7 @@ const searchId = `search-hero-${Math.random().toString(36).slice(2, 10)}`;
       ></div>
     </div>
   </div>
+  <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[var(--color-canvas)]"></div>
 </section>
 
 <script>
