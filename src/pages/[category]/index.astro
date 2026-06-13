@@ -74,7 +74,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
         {isParentView && parentData ? (
           <section class="site-panel rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 lg:p-10">
             <nav class="docs-breadcrumbs mb-6 flex flex-wrap items-center gap-2 text-sm text-[var(--color-text-muted)]">
-              <a href="/" class="breadcrumb-link transition hover:text-[var(--color-accent)]">Home</a>
+              <a href={import.meta.env.BASE_URL} class="breadcrumb-link transition hover:text-[var(--color-accent)]">Home</a>
               <span>/</span>
               <span class="breadcrumb-current text-[var(--color-text-strong)]">{parentData.name}</span>
             </nav>

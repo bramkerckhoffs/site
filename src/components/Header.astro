@@ -12,14 +12,14 @@ function isActiveNavItem(href: string) {
 
 <header class="site-header sticky top-0 z-40 w-full shrink-0 border-b border-[var(--color-border)] bg-[color:color-mix(in_srgb,var(--color-surface)_95%,transparent)] backdrop-blur">
   <div class="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 md:px-8">
-    <a href="/" class="text-2xl font-bold tracking-tight text-[var(--color-text-strong)] transition-opacity hover:opacity-80">
+    <a href={import.meta.env.BASE_URL} class="text-2xl font-bold tracking-tight text-[var(--color-text-strong)] transition-opacity hover:opacity-80">
       {site.name}
     </a>
 
     <nav class="hidden items-center gap-6 text-sm font-medium text-[var(--color-text)] lg:flex">
       {docsParentCategories.map((category) => (
         (() => {
-          const href = `/${category.slug}`;
+          const href = `${import.meta.env.BASE_URL}${category.slug}`;
           const isActive = isActiveNavItem(href);
 
           return (
@@ -103,7 +103,7 @@ function isActiveNavItem(href: string) {
       <nav class="flex flex-col gap-1">
         {docsParentCategories.map((category) => (
           (() => {
-            const href = `/${category.slug}`;
+            const href = `${import.meta.env.BASE_URL}${category.slug}`;
             const isActive = isActiveNavItem(href);
 
             return (
