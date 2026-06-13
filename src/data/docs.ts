@@ -65,11 +65,11 @@ export function getCategoriesForParent(parentSlug: string) {
   return docsCategories.filter((category) => category.parent === parentSlug);
 }
 
-const BASE = import.meta.env.BASE_URL; // e.g. '/site/'
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, ''); // e.g. '/site'
 
 export function getCategoryHref(categorySlug: string) {
   const parentSlug = getParentForCategory(categorySlug);
-  return parentSlug ? `${BASE}${parentSlug}/${categorySlug}` : `${BASE}${categorySlug}`;
+  return parentSlug ? `${BASE}/${parentSlug}/${categorySlug}` : `${BASE}/${categorySlug}`;
 }
 
 export type SidebarSection = {

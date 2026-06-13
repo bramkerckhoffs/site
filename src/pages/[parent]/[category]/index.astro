@@ -52,7 +52,7 @@ const searchPreviews = getSearchPreviewLookup(allDocs);
         <nav class="docs-breadcrumbs mb-6 flex flex-wrap items-center gap-2 text-sm text-[var(--color-text-muted)]">
           <a href={import.meta.env.BASE_URL} class="breadcrumb-link transition hover:text-[var(--color-accent)]">Home</a>
           <span>/</span>
-          {parent && <a href={`${import.meta.env.BASE_URL}${parent.slug}`} class="breadcrumb-link transition hover:text-[var(--color-accent)]">{parent.name}</a>}
+          {parent && <a href={`${import.meta.env.BASE_URL.replace(/\/+$/, '')}/${parent.slug}`} class="breadcrumb-link transition hover:text-[var(--color-accent)]">{parent.name}</a>}
           <span>/</span>
           <span class="breadcrumb-current text-[var(--color-text-strong)]">{subcategory?.name ?? category}</span>
         </nav>

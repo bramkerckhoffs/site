@@ -19,7 +19,7 @@ function isActiveNavItem(href: string) {
     <nav class="hidden items-center gap-6 text-sm font-medium text-[var(--color-text)] lg:flex">
       {docsParentCategories.map((category) => (
         (() => {
-          const href = `${import.meta.env.BASE_URL}${category.slug}`;
+          const href = `${import.meta.env.BASE_URL.replace(/\/+$/, '')}/${category.slug}`;
           const isActive = isActiveNavItem(href);
 
           return (
@@ -103,7 +103,7 @@ function isActiveNavItem(href: string) {
       <nav class="flex flex-col gap-1">
         {docsParentCategories.map((category) => (
           (() => {
-            const href = `${import.meta.env.BASE_URL}${category.slug}`;
+            const href = `${import.meta.env.BASE_URL.replace(/\/+$/, '')}/${category.slug}`;
             const isActive = isActiveNavItem(href);
 
             return (
