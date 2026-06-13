@@ -1,0 +1,148 @@
+---
+interface Props {
+  repo: string;     // "user/repo"
+  file: string;     // "src/example.js"
+  branch?: string;  // default: "main"
+  lang?: string;    // "js", "ts", "python", etc. (auto-detect from extension if omitted)
+}
+
+const { repo, file, branch = 'main', lang } = Astro.props;
+const rawUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${file}`;
+const githubUrl = `https://github.com/${repo}/blob/${branch}/${file}`;
+const displayLang = lang ?? file.split('.').pop() ?? 'text';
+const id = `gh-code-${Math.random().toString(36).slice(2, 10)}`;
+---
+
+<div class="code-block-shell not-prose my-0" id={id}>
+  <pre class="astro-code gh-code" data-language={displayLang} data-gh-raw={rawUrl} data-gh-lang={displayLang} tabindex="0">
+    <div class="code-block-header" style="pointer-events: auto;">
+      <span class="code-block-language-tab" data-language-long={displayLang.length > 6 ? 'true' : undefined}>
+        {displayLang}
+      </span>
+      <span style="color: var(--color-code-header-text); margin: 0 0.5rem;">·</span>
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="gh-code-link flex items-center gap-0 text-xs font-medium"
+        style="pointer-events: auto; color: var(--color-code-header-text); text-decoration: none;"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-right: 5px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg><span style="position: relative; top: -0.25px; left: 6px;">{repo}</span>
+      </a>
+    </div>
+    <button
+      class="code-block-copy"
+      type="button"
+      aria-label="Copy code"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+      </svg>
+    </button>
+    <code class="gh-code-content"></code>
+  </pre>
+</div>
+
+<style is:global>
+  /* highlight.js github-light theme */
+  .hljs { color: #24292e; background: transparent; }
+  .hljs-doctag, .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-variable.language_ { color: #d73a49; }
+  .hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_ { color: #6f42c1; }
+  .hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-number, .hljs-operator, .hljs-variable, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id { color: #005cc5; }
+  .hljs-regexp, .hljs-string, .hljs-meta .hljs-string { color: #032f62; }
+  .hljs-built_in, .hljs-symbol { color: #e36209; }
+  .hljs-comment, .hljs-code, .hljs-formula { color: #6a737d; font-style: italic; }
+  .hljs-name, .hljs-quote, .hljs-selector-tag, .hljs-selector-pseudo { color: #22863a; }
+  .hljs-subst { color: #24292e; }
+  .hljs-section { color: #005cc5; font-weight: bold; }
+  .hljs-bullet { color: #735c0f; }
+  .hljs-emphasis { color: #24292e; font-style: italic; }
+  .hljs-strong { color: #24292e; font-weight: bold; }
+  .hljs-addition { color: #22863a; background-color: #f0fff4; }
+  .hljs-deletion { color: #b31d28; background-color: #ffeef0; }
+
+  /* highlight.js github-dark theme */
+  html.dark .hljs { color: #c9d1d9; }
+  html.dark .hljs-doctag, html.dark .hljs-keyword, html.dark .hljs-template-tag, html.dark .hljs-template-variable, html.dark .hljs-type, html.dark .hljs-variable.language_ { color: #ff7b72; }
+  html.dark .hljs-title, html.dark .hljs-title.class_, html.dark .hljs-title.class_.inherited__, html.dark .hljs-title.function_ { color: #d2a8ff; }
+  html.dark .hljs-attr, html.dark .hljs-attribute, html.dark .hljs-literal, html.dark .hljs-meta, html.dark .hljs-number, html.dark .hljs-operator, html.dark .hljs-variable, html.dark .hljs-selector-attr, html.dark .hljs-selector-class, html.dark .hljs-selector-id { color: #79c0ff; }
+  html.dark .hljs-regexp, html.dark .hljs-string, html.dark .hljs-meta .hljs-string { color: #a5d6ff; }
+  html.dark .hljs-built_in, html.dark .hljs-symbol { color: #ffa657; }
+  html.dark .hljs-comment, html.dark .hljs-code, html.dark .hljs-formula { color: #8b949e; font-style: italic; }
+  html.dark .hljs-name, html.dark .hljs-quote, html.dark .hljs-selector-tag, html.dark .hljs-selector-pseudo { color: #7ee787; }
+  html.dark .hljs-subst { color: #c9d1d9; }
+  html.dark .hljs-section { color: #1f6feb; font-weight: bold; }
+  html.dark .hljs-bullet { color: #f2cc60; }
+  html.dark .hljs-emphasis { color: #c9d1d9; font-style: italic; }
+  html.dark .hljs-strong { color: #c9d1d9; font-weight: bold; }
+  html.dark .hljs-addition { color: #aff5b4; background-color: #033a16; }
+  html.dark .hljs-deletion { color: #ffdcd7; background-color: #67060c; }
+
+  .gh-code-link:hover {
+    color: var(--color-accent) !important;
+  }
+
+  pre.gh-code.astro-code {
+    padding-top: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  pre.gh-code .code-block-header {
+    min-height: 2.5rem;
+  }
+
+  /* Loading state */
+  .gh-code-content:empty::before {
+    content: 'Loading...';
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>
+
+<script>
+  import hljs from 'highlight.js/lib/common';
+
+  async function loadGitHubCode(pre: HTMLElement) {
+    const url = pre.dataset.ghRaw;
+    const lang = pre.dataset.ghLang ?? 'text';
+    const codeEl = pre.querySelector('.gh-code-content') as HTMLElement;
+    const copyBtn = pre.closest('.code-block-shell')?.querySelector('.code-block-copy') as HTMLButtonElement | null;
+
+    if (!url || !codeEl) return;
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`GitHub fetch failed: ${res.status}`);
+      const text = await res.text();
+
+      const highlighted = hljs.getLanguage(lang)
+        ? hljs.highlight(text, { language: lang })
+        : hljs.highlightAuto(text);
+
+      codeEl.innerHTML = highlighted.value;
+      codeEl.classList.add('hljs');
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.setAttribute('data-copy-tooltip', 'Copied!');
+            copyBtn.setAttribute('data-copy-state', 'success');
+          } catch {
+            copyBtn.setAttribute('data-copy-tooltip', 'Failed');
+            copyBtn.setAttribute('data-copy-state', 'error');
+          }
+          setTimeout(() => {
+            copyBtn.removeAttribute('data-copy-tooltip');
+            copyBtn.removeAttribute('data-copy-state');
+          }, 2000);
+        });
+      }
+    } catch (err) {
+      codeEl.textContent = `Could not load code from GitHub.\n${err}`;
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-gh-raw]').forEach(loadGitHubCode);
+</script>

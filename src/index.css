@@ -1,21 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@font-face {
-  font-family: 'Geist Sans';
-  font-style: normal;
-  font-display: fallback;
-  font-weight: 100 900;
-  src: url('/fonts/Geist-Variable.woff2') format('woff2-variations');
-}
-
-@font-face {
-  font-family: 'Geist Mono';
-  font-style: normal;
-  font-display: fallback;
-  font-weight: 100 900;
-  src: url('/fonts/GeistMono-Variable.woff2') format('woff2-variations');
-}
 
 :root {
   --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
@@ -318,7 +303,7 @@ html.dark .astro-code {
   color: var(--shiki-dark, inherit) !important;
 }
 
-html.dark .astro-code span {
+html.dark .astro-code:not(.gh-code) span {
   color: var(--shiki-dark, inherit) !important;
   font-style: var(--shiki-dark-font-style, inherit) !important;
   font-weight: var(--shiki-dark-font-weight, inherit) !important;

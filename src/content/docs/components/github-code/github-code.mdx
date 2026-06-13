@@ -1,0 +1,55 @@
+---
+title: "GitHub Code"
+description: "Embed live code directly from a GitHub repository. The code block updates automatically whenever you push changes to GitHub."
+category: "components"
+order: 10
+updatedAt: 2026-06-13
+---
+
+Use `GitHubCode` when you want to reference code that lives in a GitHub repository. Instead of copying and pasting code into your docs, the component fetches it live from GitHub — so your docs always show the latest version without any extra steps.
+
+## Use in MDX
+
+Point the component at a repository and file path:
+
+```mdx
+<GitHubCode repo="andreialba/compass" file="astro.config.mjs" />
+```
+
+You can also specify a branch and override the language for syntax highlighting:
+
+```mdx
+<GitHubCode
+  repo="andreialba/compass"
+  file="site.config.mjs"
+  branch="main"
+  lang="js"
+/>
+```
+
+## Props
+
+| Prop | Required | Default | Description |
+|---|---|---|---|
+| `repo` | yes | — | GitHub repository in `user/repo` format |
+| `file` | yes | — | Path to the file within the repository |
+| `branch` | no | `"main"` | Branch to read from |
+| `lang` | no | file extension | Language for syntax highlighting |
+
+## How it works
+
+The component fetches the raw file from `raw.githubusercontent.com` in the browser each time the page loads. This means:
+
+- No rebuild or redeploy needed when you update the code on GitHub
+- The displayed code is always in sync with your repository
+- The header links directly to the file on GitHub for easy navigation
+
+## Preview
+
+The example below pulls the Astro config directly from the Compass repository:
+
+<GitHubCode repo="andreialba/compass" file="astro.config.mjs" lang="js" />
+
+And the site config:
+
+<GitHubCode repo="andreialba/compass" file="site.config.mjs" lang="js" />
